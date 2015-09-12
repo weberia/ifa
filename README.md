@@ -1,7 +1,7 @@
-ifajs
-=====
+pithy.js
+========
 
-A module for pragmatic interaction between client and server. This module, as its name implies, is *interaction for action*. This module can be used independently.
+A module for pragmatic interaction between client and server. This module is ``reference implementation`` of IfA (``Interaction for Action``) language specification. 
 
 Some interesting links:
 *	http://shamansir.github.io/blog/articles/generating-functional-parsers/
@@ -12,4 +12,3 @@ Some interesting links:
 *	http://nathansuniversity.com/
 *	https://coderwall.com/p/316gba/beginning-parsers-with-peg-js
 *	https://github.com/PhilippeSigaud/Pegged/wiki/PEG-Basics
-
