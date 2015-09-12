@@ -1,0 +1,14 @@
+display "Example of ifa script to find and display services"
+
+visit "http://bpdp.name/services" do
+
+	display "List all services"
+	display list-services all
+
+	display "List machine processable services"
+	display list-services machine
+
+	display "List human processable services"
+	display list-services human
+
+end visit

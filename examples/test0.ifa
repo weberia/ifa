@@ -1,0 +1,3 @@
+REQUEST "http://www.google.com"
+REQUEST "http://www.w3.org/Consortium/Offices/Presentations/RDFTutorial/rdfs/Countries.owl"
+REQUEST "https://raw.githubusercontent.com/json-ld/json-ld.org/master/test-suite/tests/toRdf-manifest.jsonld"

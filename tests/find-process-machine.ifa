@@ -1,0 +1,14 @@
+display "Example of ifa script to access 
+	social commitments"
+
+visit "http://company.io/commitments" do
+
+	send commitment(
+		"marketing.company.io", 
+		"bambangpdp@yahoo.com", 
+		"request('catalog','laptop'),
+	) saveto catalog_result
+
+	display catalog_result
+
+end visit

@@ -1,0 +1,27 @@
+{
+  "name": "ifajs",
+  "version": "1.0.0",
+  "description": "Interaction for Action module for project Weberia",
+  "main": "ifa.js",
+  "dependencies": {
+    "pegjs": "^0.9.0",
+    "commander": "2.8.1"
+  },
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/weberia/ifajs"
+  },
+  "keywords": [
+    "Interaction",
+    "DSL",
+    "Pragmatic"
+  ],
+  "author": "Bambang Purnomosidi",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
