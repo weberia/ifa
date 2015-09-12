@@ -56,23 +56,32 @@ representatives
 	=	assertive / informative
 assertive
 	=	'ASSERT' _ url:string _ propositional:string
+		{ assert(url, propositional) }
 informative
-	=	'INFORM'
+	=	'INFORM' _ url:string _ propositional:string
+		{ inform(url, propositional) }
 
 directives
-	=	request:'REQUEST' _ url:string { getRequest(url) }
+	=	'REQUEST' _ url:string { getRequest(url) }
 
+// (pragmatics) Making a commitment, such as a promise or threat,
+// by illocutionary means.
+// 	ex: "I will buy if you give me 30% discounts"
 commissives
-	=	'CONSENT'
+	=	'CONSENT' _ url:string _ action:string _ requirements:string
+		{ consent(action, requirements) }
 
 expressives
 	=	apologize / thank / complain
 apologize
-	=	'APOLOGIZE'
+	=	'APOLOGIZE' _ url:string _ propositional:string
+		{ apologize(url, propositional) }
 thank
-	=	'THANK'
+	=	'THANK' _ url:string _ propositional:string
+		{ thank(url, propositional) }
 complain
-	=	'COMPLAIN'
+	=	'COMPLAIN' _ url:string _ propositional:string
+		{ complain(url, propositional) }
 
 declaratives
 	=	'DECLARE'
