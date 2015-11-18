@@ -1,56 +1,20 @@
 {
-    var http = require('http')
-        , https = require('https');
+  var request = require('request');
 
-    function getHttpContents(url) {
-        console.log('Getting  '  + url + ' ...')
-        http.get(url, function(res) {
-            console.log("Got response: " + res.statusCode);
-            console.log('HEADERS: ' + JSON.stringify(res.headers));
-            res.setEncoding('utf8');
-            var body = '';
-            res.on('data', function (chunk) {
-                body += chunk;
-            });
-            res.on('end', function() {
-                console.log(body)
-            })
-        }).on('error', function(e) {
-            console.log("Got error: " + e.message);
-        });
-    }
-
-    function getHttpsContents(url) {
-        console.log('Getting  '  + url + ' ...')
-        https.get(url, function(res) {
-            console.log("Got response: " + res.statusCode);
-            console.log('HEADERS: ' + JSON.stringify(res.headers));
-            res.setEncoding('utf8');
-            var body = '';
-            res.on('data', function (chunk) {
-                body += chunk;
-            });
-            res.on('end', function() {
-                console.log(body)
-            })
-        }).on('error', function(e) {
-            console.log("Got error: " + e.message);
-        });
-    }
-
-    function getRequest(url) {
-        if (url.substr(0,5)=='https') {
-            getHttpsContents(url);
-        } else {
-            getHttpContents(url);
-        }
-    }
+  function getRequest(url) {
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log(body);
+      }
+    });
+  }
 }
 
 start
-    =   (force EOL)+
+  = (force EOL)+
+
 force
-    =   representatives / directives / commissives / expressives / declaratives
+  = representatives / directives / commissives / expressives / declaratives
 
 representatives
     =   assertive / informative

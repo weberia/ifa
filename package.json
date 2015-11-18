@@ -4,8 +4,9 @@
   "description": "Interaction for Action module for project Weberia",
   "main": "ifa.js",
   "dependencies": {
+    "commander": "^2.9.0",
     "pegjs": "^0.9.0",
-    "commander": "2.8.1"
+    "request": "^2.65.0"
   },
   "scripts": {
     "test": "mocha spec"

@@ -5,7 +5,7 @@ var	fs = require('fs')
 cmdline
 	.version('1.0.0')
 	.usage('<options>')
-	.option('-i, --inputfile <file>', 'Script file consists of IfA commands to be executred')
+	.option('-i, --inputfile <file>', 'Use <file>, consists of IfA command(s) as input')
 	.parse(process.argv);
 
 if (!process.argv.slice(2).length) {
