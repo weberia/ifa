@@ -1,9 +1,9 @@
 {
-  "name": "pithy",
+  "name": "zax",
   "version": "0.9.0",
   "description": "A declarative query language for web systems",
-  "main": "pithy.js",
-  "bin": "bin/pithy",
+  "main": "zax.js",
+  "bin": "bin/zax",
   "dependencies": {
     "commander": "^2.9.0",
     "pegjs": "^0.9.0",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/weberia/pithy"
+    "url": "http://github.com/weberia/zax"
   },
   "keywords": [
     "Interaction",
