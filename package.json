@@ -1,6 +1,6 @@
 {
   "name": "zax",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "A declarative query language for web systems",
   "main": "zax.js",
   "bin": "bin/zax",
