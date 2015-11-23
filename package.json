@@ -1,6 +1,6 @@
 {
   "name": "pithy",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "A declarative query language for web systems",
   "main": "pithy.js",
   "bin": "bin/pithy",
