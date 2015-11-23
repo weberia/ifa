@@ -1,5 +1,5 @@
 {
-  "name": "pithyjs",
+  "name": "pithy",
   "version": "0.9.1",
   "description": "A declarative query language for web systems",
   "main": "pithy.js",
