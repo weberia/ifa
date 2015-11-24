@@ -2,4 +2,4 @@
 
 "use strict";
 
-var pithy = require('../zax.js')
+var zax = require('../zax.js')
