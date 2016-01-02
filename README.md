@@ -1,6 +1,7 @@
 # Zax
 
 ![Zax logo](images/logo-zax.png)
+
 A module for pragmatic interaction between client and server. This module is meant to be a ``reference implementation`` of IfA (``Interaction for Action``) language specification.
 
 # Install
