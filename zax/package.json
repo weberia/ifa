@@ -2,7 +2,7 @@
   "name": "zax",
   "version": "0.9.3",
   "description": "A declarative query language for web systems",
-  "main": "zax.js",
+  "main": "lib/index.js",
   "bin": "bin/zax",
   "dependencies": {
     "commander": "^2.9.0",

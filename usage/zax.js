@@ -1,7 +1,14 @@
 var	fs = require('fs'),
     PEG = require('pegjs'),
+    Zax = require('zax'),
     cmdline = require('commander');
 
+const zax = new Zax();
+
+console.log(zax.getProduct(1));
+var result = zax.query('REQUEST "https://raw.githubusercontent.com/json-ld/json-ld.org/master/test-suite/tests/toRdf-manifest.jsonld"');
+console.log('Query result: \n' + result);
+/*
 cmdline
   .version('1.0.0')
   .usage('<options>')
@@ -28,3 +35,4 @@ if (cmdline.inputfile) {
     });
   });
 }
+*/
