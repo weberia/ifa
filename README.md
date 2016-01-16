@@ -1,22 +1,5 @@
-# Zax
+# IfA
 
-![Zax logo](images/logo-zax.png)
+This repo is used to store a reference implementation of IfA (Interaction for Action), a domain specific language for pragmatic interaction betwen client and service provider. It currently consists of [Zax, the reference implementation of IfA](zax/) and an example of its [usage](usage/).
 
-A module for pragmatic interaction between client and server. This module is meant to be a ``reference implementation`` of IfA (``Interaction for Action``) language specification.
-
-# Install
-
-Depends on your Node.js installation, probably you need to use ``sudo''.
-
-```
-$ npm -g install zax
-```
-
-# Run
-
-```
-$ zax -i script.ifa
-```
-
-See *examples* directory for some examples in writing IfA script.
 

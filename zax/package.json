@@ -1,0 +1,29 @@
+{
+  "name": "zax",
+  "version": "0.9.3",
+  "description": "A declarative query language for web systems",
+  "main": "zax.js",
+  "bin": "bin/zax",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "pegjs": "^0.9.0",
+    "request": "^2.67.0"
+  },
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/weberia/zax"
+  },
+  "keywords": [
+    "Interaction",
+    "DSL",
+    "Pragmatic"
+  ],
+  "author": "Bambang Purnomosidi",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}

@@ -14,7 +14,7 @@ if (!process.argv.slice(2).length) {
 
 if (cmdline.inputfile) {
   console.log('Executing ' + cmdline.inputfile + ' ... ');
-  fs.readFile('ifa.pegjs', 'utf8', function (err,grammar) {
+  fs.readFile('lib/ifa.pegjs', 'utf8', function (err,grammar) {
     if (err) {
       return console.log(err);
     }
