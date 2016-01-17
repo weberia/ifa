@@ -1,16 +1,17 @@
 {
-  var request = require('request');
+
+  var request = require('sync-request'),
+      S = require('string');
 
   function getRequest(url) {
-    request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        console.log(body);
-      }
-    });
+    
+    var res = request('GET', url);
+    var obj = S(res.getBody().toString().trim());
+    return obj;
+
   }
 
 }
-
 start
   = (force EOL)+
 
@@ -27,7 +28,7 @@ informative
     { inform(url, propositional) }
 
 directives
-  = 'REQUEST' _ url:string { getRequest(url) }
+  = 'REQUEST' _ url:string { return getRequest(url)  } //return getRequest(url) }
 
 // (pragmatics) Making a commitment, such as a promise or threat,
 // by illocutionary means.
@@ -68,8 +69,8 @@ char
       / "u" digits:$(HEXDIG HEXDIG HEXDIG HEXDIG) {
         return String.fromCharCode(parseInt(digits, 16));
       }
-    ) { 
-        return sequence; 
+    ) {
+        return sequence;
     }
 
 escape
