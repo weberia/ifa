@@ -3,16 +3,13 @@
 var	fs = require('fs'),
     PEG = require('pegjs');
 
-function Zax() {};
+function Zax() {
+  this.grammar = fs.readFileSync(__dirname + '/ifa.pegjs', 'utf8').toString();
+};
 
 Zax.prototype.query = function (statement) {
-  fs.readFile(__dirname + '/ifa.pegjs', 'utf8', function (err,grammar) {
-    if (err) {
-      return console.log(err);
-    }
-    var parser = PEG.buildParser(grammar);
-    return parser.parse(statement.trim());
-  });
+  var parser = PEG.buildParser(this.grammar.trim());
+  return parser.parse(statement.trim());
 }
 
 module.exports = Zax;
