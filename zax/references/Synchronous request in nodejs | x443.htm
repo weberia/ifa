@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)]><!-->
+<html lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Synchronous request in nodejs | x443</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/style.css">
+<link rel="pingback" href="https://x443.wordpress.com/xmlrpc.php">
+<meta name="google-site-verification" content="ITkzpRbgxw-8FwEeXmHBkc0zJBOAd8Mqz8t8qu_TME4">
+<meta name="msvalidate.01" content="7424183D0D700D7B19908B1CDF2D37C2">
+<link rel="alternate" type="application/rss+xml" title="x443 » Feed" href="https://x443.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="x443 » Comments Feed" href="https://x443.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="x443 » Synchronous request in&nbsp;nodejs Comments Feed" href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<link rel="stylesheet" id="all-css-0" href="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/a.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/a.js"></script>
+<link rel="stylesheet" id="all-css-0" href="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/style_002.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://x443.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="./ winser – run node.js applications as windows services using&nbsp;nssm" href="https://x443.wordpress.com/2012/09/20/winser-run-node-js-applications-as-windows-services-using-nssm/">
+<link rel="next" title="Blazing fast node.js: 10 performance&nbsp;tips" href="https://x443.wordpress.com/2012/09/20/blazing-fast-node-js-10-performance-tips/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/">
+<link rel="shortlink" href="http://wp.me/p1c5pB-Gw">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fx443.wordpress.com%2F2012%2F09%2F20%2Fsynchronous-request-in-nodejs%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fx443.wordpress.com%2F2012%2F09%2F20%2Fsynchronous-request-in-nodejs%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Synchronous request in nodejs">
+<meta property="og:url" content="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/">
+<meta property="og:description" content="javascript - Synchronous request in nodejs Depending on whether you need the results in each subsequent function, I'd either use series, parallel, or waterfall. Series&nbsp;when they have to be serially...">
+<meta property="article:published_time" content="2012-09-20T19:16:29+00:00">
+<meta property="article:modified_time" content="2012-09-20T19:16:30+00:00">
+<meta property="og:site_name" content="x443">
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://x443.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://x443.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://x443.wordpress.com/osd.xml" title="x443">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+<meta name="application-name" content="x443"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Just another WordPress.com site"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://x443.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Synchronous request in&nbsp;nodejs | x443 on WordPress.com">
+<meta name="description" content="javascript - Synchronous request in nodejs https://github.com/caolan/async Depending on whether you need the results in each subsequent function, I'd either use series, parallel, or waterfall. Series&nbsp;when they have to be serially executed, but you don't necessarily need the results in each subsequent function call. Parallel&nbsp;if they can be executed in parallel, you don't need the…">
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="stylesheet" type="text/css" id="gravatar-card-css" href="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/services.css"></head>
+
+<body class="single single-post postid-2636 single-format-standard mp6 customizer-styles-applied single-author highlander-enabled highlander-light">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="https://x443.wordpress.com/" title="x443" rel="home">x443</a>
+					</span>
+				</div>
+				<div id="site-description">Just another WordPress.com site</div>
+
+										<a class="home-link" href="https://x443.wordpress.com/" title="x443" rel="home">
+							<img src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/fern.jpg" alt="" width="940" height="198">
+						</a>
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu"><ul><li><a href="https://x443.wordpress.com/">Home</a></li><li class="page_item page-item-2"><a href="https://x443.wordpress.com/about/">About</a></li><li class="page_item page-item-290"><a href="https://x443.wordpress.com/tv/">tv</a></li><li class="page_item page-item-2435"><a href="https://x443.wordpress.com/varnish/">varnish</a></li></ul></div>
+			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="https://x443.wordpress.com/2012/09/20/winser-run-node-js-applications-as-windows-services-using-nssm/" rel="prev"><span class="meta-nav">←</span> ./ winser – run node.js applications as windows services using&nbsp;nssm</a></div>
+					<div class="nav-next"><a href="https://x443.wordpress.com/2012/09/20/blazing-fast-node-js-10-performance-tips/" rel="next">Blazing fast node.js: 10 performance&nbsp;tips <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-2636" class="post-2636 post type-post status-publish format-standard hentry category-uncategorized">
+											<h2 class="entry-title"><a href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/" rel="bookmark">Synchronous request in&nbsp;nodejs</a></h2>					
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/" title="21:16" rel="bookmark"><span class="entry-date">September 20, 2012</span></a>						<span class="by-author"><span class="sep">by</span> <span class="author vcard"><a class="url fn n" href="https://x443.wordpress.com/author/rg443/" title="View all posts by rg443" rel="author">rg443</a></span> </span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p><a href="http://stackoverflow.com/questions/6048504/synchronous-request-in-nodejs">javascript – Synchronous request in nodejs</a></p>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;"><a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="https://github.com/caolan/async"><br class="Apple-interchange-newline">https://github.com/caolan/async</a></p>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;">Depending on whether you need the results in each subsequent function, I’d either use series, parallel, or waterfall.</p>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;"><a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="https://github.com/caolan/async#series">Series</a>&nbsp;when they have to be serially executed, but you don’t necessarily need the results in each subsequent function call.</p>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;"><a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="https://github.com/caolan/async#parallel">Parallel</a>&nbsp;if
+ they can be executed in parallel, you don’t need the results from each 
+during each parallel function, and you need a callback when all have 
+completed.</p>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;"><a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="https://github.com/caolan/async#waterfall">Waterfall</a>&nbsp;if you want to morph the results in each function and pass to the next</p>
+<pre class="lang-js prettyprint" style="margin-top:0;margin-bottom:10px;padding:5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;overflow:auto;width:auto;max-height:600px;color:#000000;line-height:18px;"><code style="margin:0;padding:0;border:0;font-size:14px;vertical-align:baseline;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;"><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">endpoints </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> 
+&nbsp;</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">[{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> path</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'/api_1.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> path</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'/api_2.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> path</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'/api_3.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}];</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+async</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">series</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">endpoints</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> http</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">results</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="com" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:gray;">// Array of results</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">});</span></code></pre>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;">Using deferreds like&nbsp;<a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="https://github.com/coolaj86/futures"><code style="margin:0;padding:1px 5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;background-position:initial initial;background-repeat:initial initial;">Futures</code></a>.</p>
+<pre class="lang-js prettyprint" style="margin-top:0;margin-bottom:10px;padding:5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;overflow:auto;width:auto;max-height:600px;color:#000000;line-height:18px;"><code style="margin:0;padding:0;border:0;font-size:14px;vertical-align:baseline;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;"><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> sequence </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">Futures</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">sequence</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">();</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+sequence
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">then</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp;http</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({},</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">);</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">then</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> res</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp;res</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">on</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">"data"</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">);</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">then</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> d</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp;http</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({},</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">);</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">then</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">next</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> res</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">...</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span></code></pre>
+<pre class="lang-js prettyprint" style="margin-top:0;margin-bottom:10px;padding:5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;overflow:auto;width:auto;max-height:600px;color:#000000;line-height:18px;"><code style="margin:0;padding:0;border:0;font-size:14px;vertical-align:baseline;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;"><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">APIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">[</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'/api_1.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'/api_2.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'/api_3.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">];</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">;</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> callAPIs </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">APIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> API </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">APIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">shift</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">();</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; http</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> path</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> API </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">res</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> 
+&nbsp; &nbsp; </span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> body </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">''</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">;</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; res</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">on</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'data'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">d</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; body </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">+=</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> d</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">;</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> 
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">});</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; res</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">on</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'end'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">()</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; </span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">if</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">APIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">length </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; callAPIs </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">APIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">);</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">});</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">});</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+callAPIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> host</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">APIs</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">);</span></code></pre>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;">&nbsp;<a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="https://github.com/olegp/common-node" rel="nofollow">Common Node library</a>:</p>
+<pre class="lang-js prettyprint" style="margin-top:0;margin-bottom:10px;padding:5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;overflow:auto;width:auto;max-height:600px;color:#000000;line-height:18px;"><code style="margin:0;padding:0;border:0;font-size:14px;vertical-align:baseline;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;"><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">url</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">{</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; </span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">return</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">new</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">require</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'httpclient'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">).</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">HttpClient</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; method</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'GET'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; url</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> url
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}).</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">finish</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">().</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">body</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">read</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">().</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">decodeToString</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">();</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> a </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com/api_1.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">),</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> 
+&nbsp; &nbsp; b </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com/api_2.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">),</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; c </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">get</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'www.example.com/api_3.php'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">);</span></code></pre>
+<p style="margin:0 0 1em;padding:0;border:0;font-size:14px;vertical-align:baseline;background-color:#ffffff;clear:both;word-wrap:break-word;color:#000000;font-family:Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;line-height:18px;">Using the&nbsp;<a style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#4a6b82;text-decoration:none;cursor:pointer;" href="http://github.com/mikeal/request" rel="nofollow">request</a>&nbsp;library can help minimize the cruft:</p>
+<pre class="lang-js prettyprint" style="margin-top:0;margin-bottom:10px;padding:5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;overflow:auto;width:auto;max-height:600px;color:#000000;line-height:18px;"><code style="margin:0;padding:0;border:0;font-size:14px;vertical-align:baseline;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;"><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> request </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> require</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'request'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> uri</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'http://api.com/1'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">err</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> response</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> body</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="com" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:gray;">// use body</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> uri</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'http://api.com/2'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">err</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> response</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> body</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:gray;">// use body</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> uri</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'http://api.com/3'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">err</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> response</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> body</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:gray;">// use body</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span></code></pre>
+<pre class="lang-js prettyprint" style="margin-top:0;margin-bottom:10px;padding:5px;border:0;font-size:14px;vertical-align:baseline;background-color:#eeeeee;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;overflow:auto;width:auto;max-height:600px;color:#000000;line-height:18px;"><code style="margin:0;padding:0;border:0;font-size:14px;vertical-align:baseline;font-family:Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;"><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> request </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> require</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'request'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">var</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">Step</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> &nbsp; &nbsp;</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> require</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'step'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+</span><span class="com" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:gray;">// request returns body as 3rd argument</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="com" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:gray;">// we have to move it so it works with Step <span class="wp-smiley wp-emoji wp-emoji-sad" title=":(">:(</span></span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">getBody </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">=</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">o</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> cb</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">o</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">err</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> resp</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> body</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; cb</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">err</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> body</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">})</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+
+</span><span class="typ" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#2b91af;">Step</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> getData</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">getBody</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> uri</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'http://api.com/?method=1'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">this</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">parallel</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">())</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">getBody</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> uri</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'http://api.com/?method=2'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">this</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">parallel</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">())</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; request</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">getBody</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">({</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> uri</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">:</span><span class="str" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#800000;">'http://api.com/?method=3'</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">this</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">parallel</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">())</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">},</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="kwd" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#00008b;">function</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> doStuff</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">err</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> r1</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> r2</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;"> r3</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">){</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">.</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">log</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">(</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">r1</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">r2</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">,</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">r3</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+&nbsp; &nbsp; </span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">}</span><span class="pln" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">
+</span><span class="pun" style="margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;color:#000000;">)</span></code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-2636" class="share-facebook sd-button share-icon no-text" href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/?share=facebook&amp;nb=1" target="_blank" title="Share on Facebook"><span></span><span class="sharing-screen-reader-text">Share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-2636" class="share-twitter sd-button share-icon no-text" href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-2636" class="share-google-plus-1 sd-button share-icon no-text" href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span></span><span class="sharing-screen-reader-text">Click to share on Google+ (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-17657079-2636-56c17fe7bb11a" data-src="//widgets.wp.com/likes/#blog_id=17657079&amp;post_id=2636&amp;origin=x443.wordpress.com&amp;obj_id=17657079-2636-56c17fe7bb11a" data-name="like-post-frame-17657079-2636-56c17fe7bb11a"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-17657079-2636-56c17fe7bb11a" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/a.htm" width="100%" frameborder="0" height="55px"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div style="display: block;" id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="2880" data-post-format="false"><span class="jp-relatedposts-post-title"><a data-position="0" data-origin="2636" rel="nofollow" title="node.js fs.readdir recursive directory search
+
+node.js fs.readdir recursive directory search A parallel loop would look like this: var fs = require('fs'); var walk =function(dir, done){ &nbsp; var results =[]; &nbsp; fs.readdir(dir,function(err, list){ &nbsp; &nbsp; if(err)return done(err); &nbsp; &nbsp; var pending = list.length; &nbsp; &nbsp; if(!pending)return done(null, results); &nbsp; &nbsp; list.forEach(function(file){ &nbsp; &nbsp; &nbsp; file =…" href="https://x443.wordpress.com/2012/10/21/node-js-fs-readdir-recursive-directory-search/" class="jp-relatedposts-post-a">node.js fs.readdir recursive directory search</a></span><span class="jp-relatedposts-post-context"></span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="2646" data-post-format="false"><span class="jp-relatedposts-post-title"><a data-position="1" data-origin="2636" rel="nofollow" title="Node: HTTP, HTTPS
+
+10. Node: HTTP, HTTPS 10.2 HTTP client There is also a HTTP client API, which allows you to make HTTP requests and read content from other websites. HTTP client Methods http.request(options, callback) http.get(options, callback) Client request Methods write(chunk, encoding='utf8') end([data], [encoding]) abort() setTimeout(timeout, [callback]) setNoDelay(noDelay=true) setSocketKeepAlive(enable=false, [initialDelay]) Events response socket…" href="https://x443.wordpress.com/2012/09/20/node-http-https/" class="jp-relatedposts-post-a">Node: HTTP, HTTPS</a></span><span class="jp-relatedposts-post-context"></span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="229" data-post-format="false"><span class="jp-relatedposts-post-title"><a data-position="2" data-origin="2636" rel="nofollow" title="New Ranking Functions within SQL Server 2005
+
+New Ranking Functions within SQL Server 2005 New Ranking Functions within SQL Server 2005With SQL Server 2005, Microsoft introduced a number of new features. These new features make it easier for a DBA or SQL Server developer to code against and to maintain SQL Server databases. In this article I…" href="https://x443.wordpress.com/2007/07/20/new-ranking-functions-within-sql-server-2005/" class="jp-relatedposts-post-a">New Ranking Functions within SQL Server 2005</a></span><span class="jp-relatedposts-post-context">In "SQL Server 2005"</span></p></div></div></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+												This entry was posted in <a href="https://x443.wordpress.com/category/uncategorized/" rel="category tag">Uncategorized</a>. Bookmark the <a href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/" title="Permalink to Synchronous request in&nbsp;nodejs" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="https://x443.wordpress.com/2012/09/20/winser-run-node-js-applications-as-windows-services-using-nssm/" rel="prev"><span class="meta-nav">←</span> ./ winser – run node.js applications as windows services using&nbsp;nssm</a></div>
+					<div class="nav-next"><a href="https://x443.wordpress.com/2012/09/20/blazing-fast-node-js-10-performance-tips/" rel="next">Blazing fast node.js: 10 performance&nbsp;tips <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+
+				<div id="respond" class="comment-respond js">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://x443.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<input id="highlander_comment_nonce" name="highlander_comment_nonce" value="2b1d22669b" type="hidden"><input name="_wp_http_referer" value="/2012/09/20/synchronous-request-in-nodejs/" type="hidden">
+<input name="hc_post_as" id="hc_post_as" value="guest" type="hidden">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea class="autosizejs " tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px none; padding: 0px; box-sizing: content-box; word-wrap: break-word; height: 0px ! important; min-height: 0px ! important; overflow: hidden; transition: none 0s ease 0s ; font-family: Arial,Helvetica,Tahoma,Verdana,sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 24px; width: 618px;">Enter your comment here...</textarea><textarea style="height: 44px; overflow: hidden; word-wrap: break-word; resize: none;" placeholder="Enter your comment here..." id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div style="display: none;" id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/a_002.htm" scrolling="no" allowtransparency="true" seamless="seamless" width="24" frameborder="0" height="24"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text"></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/wplogo.png" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" type="hidden">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'wordpress'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" type="hidden">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'twitter'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" type="hidden">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'facebook'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Google+ photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" type="hidden">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'googleplus'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div style="display: none;" id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p style="display: none;" class="form-submit"><input name="submit" id="comment-submit" class="submit" value="Post Comment" type="submit"> <input name="comment_post_ID" value="2636" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p><p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="02b4549e96" type="hidden"></p>
+<input name="genseq" value="1455521767" type="hidden">
+<p style="display: none;"></p>				<input id="ak_js" name="ak_js" value="1455522029600" type="hidden"></form>
+					</div><!-- #respond -->
+		<div style="clear: both"></div>
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+						<ul class="xoxo">
+
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="https://x443.wordpress.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input name="s" id="s" type="text">
+					<input id="searchsubmit" value="Search" type="submit">
+				</div>
+			</form></li>		<li id="recent-posts-2" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="https://x443.wordpress.com/2012/12/06/designing-todo-app-backend-using-redis-and-mongodb/">Designing todo app backend using redis and&nbsp;mongodb</a>
+						</li>
+					<li>
+				<a href="https://x443.wordpress.com/2012/12/04/multicast-firewall-load-sharing-on-checkpoint-clusterxl-firewalls-with-cisco-devices/">Multicast Firewall Load Sharing on Checkpoint ClusterXL Firewalls with Cisco&nbsp;Devices</a>
+						</li>
+					<li>
+				<a href="https://x443.wordpress.com/2012/12/04/configure-3-leg-perimeter-dmz-using-forefront-tmg-2010/">Configure 3-Leg Perimeter (DMZ) using Forefront TMG&nbsp;2010</a>
+						</li>
+					<li>
+				<a href="https://x443.wordpress.com/2012/12/04/build-your-own-cheap-iscsi-san-for-esx-server/">Build Your Own Cheap iSCSI SAN for ESX&nbsp;Server</a>
+						</li>
+					<li>
+				<a href="https://x443.wordpress.com/2012/12/04/vmware-finally-admits-that-its-costs-are-higher-than-microsofts/">VMware (finally) admits that its costs are higher than&nbsp;Microsoft’s</a>
+						</li>
+				</ul>
+		</li>		<li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+			<li><a href="https://x443.wordpress.com/2012/12/">December 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/11/">November 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/10/">October 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/09/">September 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/08/">August 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/07/">July 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/06/">June 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/05/">May 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/04/">April 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/03/">March 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/02/">February 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2012/01/">January 2012</a></li>
+	<li><a href="https://x443.wordpress.com/2011/12/">December 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/11/">November 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/10/">October 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/09/">September 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/08/">August 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/07/">July 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/06/">June 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/05/">May 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/04/">April 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/03/">March 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/02/">February 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2011/01/">January 2011</a></li>
+	<li><a href="https://x443.wordpress.com/2010/12/">December 2010</a></li>
+	<li><a href="https://x443.wordpress.com/2010/11/">November 2010</a></li>
+	<li><a href="https://x443.wordpress.com/2010/02/">February 2010</a></li>
+	<li><a href="https://x443.wordpress.com/2010/01/">January 2010</a></li>
+	<li><a href="https://x443.wordpress.com/2009/12/">December 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/11/">November 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/10/">October 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/09/">September 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/08/">August 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/07/">July 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/05/">May 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/04/">April 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/03/">March 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2009/01/">January 2009</a></li>
+	<li><a href="https://x443.wordpress.com/2008/12/">December 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2008/11/">November 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2008/09/">September 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2008/08/">August 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2008/03/">March 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2008/02/">February 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2008/01/">January 2008</a></li>
+	<li><a href="https://x443.wordpress.com/2007/12/">December 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/11/">November 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/10/">October 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/09/">September 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/08/">August 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/07/">July 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/05/">May 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/04/">April 2007</a></li>
+	<li><a href="https://x443.wordpress.com/2007/03/">March 2007</a></li>
+		</ul>
+		</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-632066"><a href="https://x443.wordpress.com/category/bildbearbeitung/">Bildbearbeitung</a>
+</li>
+	<li class="cat-item cat-item-36526704"><a href="https://x443.wordpress.com/category/checkpoint-2/">CheckPoint</a>
+</li>
+	<li class="cat-item cat-item-28532"><a href="https://x443.wordpress.com/category/cisco/">Cisco</a>
+</li>
+	<li class="cat-item cat-item-45971366"><a href="https://x443.wordpress.com/category/cisco-nat-route-map/">CISCO / NAT / ROUTE-MAP</a>
+</li>
+	<li class="cat-item cat-item-45971359"><a href="https://x443.wordpress.com/category/cisco-nbar/">Cisco NBAR</a>
+</li>
+	<li class="cat-item cat-item-45971360"><a href="https://x443.wordpress.com/category/cisco-private-vlan/">Cisco Private VLAN</a>
+</li>
+	<li class="cat-item cat-item-45971354"><a href="https://x443.wordpress.com/category/cisco-webvpn/">Cisco WebVPN</a>
+</li>
+	<li class="cat-item cat-item-6572"><a href="https://x443.wordpress.com/category/code-snippets/">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-45971364"><a href="https://x443.wordpress.com/category/configuration-change-tracking/">Configuration Change Tracking</a>
+</li>
+	<li class="cat-item cat-item-7489671"><a href="https://x443.wordpress.com/category/cisco/dmvpn/">DMVPN</a>
+</li>
+	<li class="cat-item cat-item-51978"><a href="https://x443.wordpress.com/category/juniper/">Juniper</a>
+</li>
+	<li class="cat-item cat-item-66761324"><a href="https://x443.wordpress.com/category/networking/juniper-srx/">Juniper SRX</a>
+</li>
+	<li class="cat-item cat-item-371507"><a href="https://x443.wordpress.com/category/lightroom/">Lightroom</a>
+</li>
+	<li class="cat-item cat-item-72999"><a href="https://x443.wordpress.com/category/microsoft-exchange-server/">Microsoft Exchange Server</a>
+</li>
+	<li class="cat-item cat-item-4419"><a href="https://x443.wordpress.com/category/mysql/">MySQL</a>
+</li>
+	<li class="cat-item cat-item-11867366"><a href="https://x443.wordpress.com/category/network-monitoring-software/">Network Monitoring Software</a>
+</li>
+	<li class="cat-item cat-item-7426"><a href="https://x443.wordpress.com/category/networking/">Networking</a>
+</li>
+	<li class="cat-item cat-item-7489673"><a href="https://x443.wordpress.com/category/cisco/nhrp/">NHRP</a>
+</li>
+	<li class="cat-item cat-item-31896918"><a href="https://x443.wordpress.com/category/code-snippets/nodejs/">nodejs</a>
+</li>
+	<li class="cat-item cat-item-436"><a href="https://x443.wordpress.com/category/photography/">Photography</a>
+</li>
+	<li class="cat-item cat-item-200820"><a href="https://x443.wordpress.com/category/ppt/">ppt</a>
+</li>
+	<li class="cat-item cat-item-581"><a href="https://x443.wordpress.com/category/software/">Software</a>
+</li>
+	<li class="cat-item cat-item-20059"><a href="https://x443.wordpress.com/category/sql-server-2005/">SQL Server 2005</a>
+</li>
+	<li class="cat-item cat-item-1219321"><a href="https://x443.wordpress.com/category/sql-server-2008/">SQL Server 2008</a>
+</li>
+	<li class="cat-item cat-item-5128"><a href="https://x443.wordpress.com/category/texte/">Texte</a>
+</li>
+	<li class="cat-item cat-item-1140133"><a href="https://x443.wordpress.com/category/the-cable-guy/">The Cable Guy</a>
+</li>
+	<li class="cat-item cat-item-200"><a href="https://x443.wordpress.com/category/travel/">Travel</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://x443.wordpress.com/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-7495958"><a href="https://x443.wordpress.com/category/code-snippets/vbasic/">VBasic</a>
+</li>
+	<li class="cat-item cat-item-111984"><a href="https://x443.wordpress.com/category/xml-xsl/">XML / XSL</a>
+</li>
+	<li class="cat-item cat-item-13444"><a href="https://x443.wordpress.com/category/zitate/">Zitate</a>
+</li>
+		</ul>
+</li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+			<li><a href="https://wordpress.com/start?ref=wplogin">Register</a></li>			<li><a href="https://x443.wordpress.com/wp-login.php">Log in</a></li>
+			<li><a href="https://x443.wordpress.com/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://x443.wordpress.com/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.com/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.com</a></li>			</ul>
+			</li><li id="top-posts-2" class="widget-container widget_top-posts"><h3 class="widget-title">Top Posts &amp; Pages</h3><ul>				<li>
+										<a href="https://x443.wordpress.com/2011/10/23/juniper-srx-pppoe-configuration-example/" class="bump-view" data-bump-view="tp">
+						Juniper SRX PPPoE Configuration Example					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2011/01/03/delete-all-arp-entries-on-splat/" class="bump-view" data-bump-view="tp">
+						Checkpoint - delete all ARP entries on SPLAT					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2011/11/06/cisco-dmvpn-tutorial/" class="bump-view" data-bump-view="tp">
+						Cisco - DMVPN Tutorial					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2012/10/26/microsoft-branchcache-on-the-riverbed-services-platform/" class="bump-view" data-bump-view="tp">
+						Microsoft BranchCache On the Riverbed Services Platform					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2012/10/15/zlib-node-js-examples/" class="bump-view" data-bump-view="tp">
+						Zlib Node.js examples					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2007/05/02/saravanas-blog/" class="bump-view" data-bump-view="tp">
+						Saravana's Blog :					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2011/06/20/hub-and-spoke-vpn-with-vti-dual-hubs-spokes-with-redundant-internet-access-2/" class="bump-view" data-bump-view="tp">
+						Cisco IOS - Hub and Spoke VPN with VTI, dual hubs, spokes with redundant internet access					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2011/01/11/cisco-ios-nat-failover-with-dual-isp/" class="bump-view" data-bump-view="tp">
+						Cisco IOS - NAT failover with 2 ISP					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2012/04/07/utf8_decode-in-vbscript-vba/" class="bump-view" data-bump-view="tp">
+						UTF8_Decode in VBScript / VBA					</a>
+									</li>
+							<li>
+										<a href="https://x443.wordpress.com/2011/02/07/checkpoint-internal-ports-explained/" class="bump-view" data-bump-view="tp">
+						Checkpoint - Internal ports explained 					</a>
+									</li>
+			</ul></li><li id="top-clicks-2" class="widget-container widget_top-clicks"><h3 class="widget-title">Top Clicks</h3><ul><li><a href="http://saloperie.com/docs/cisco/BRKCRT-2046.pdf" target="_blank" rel="nofollow">saloperie.com/docs/cisco/…</a></li><li><a href="http://www.riverbed.com/microsoft/media/docs/PerformanceBrief-Riverbed-MicrosoftBranchCache.pdf" target="_blank" rel="nofollow">riverbed.com/microsoft/me…</a></li><li><a href="http://kb.juniper.net/InfoCenter/index?page=content&amp;id=TN109" target="_blank" rel="nofollow">kb.juniper.net/InfoCenter…</a></li><li><a href="http://bytes.com/topic/access/insights/906671-rc4-encryption-algorithm-vba-vbscript" target="_blank" rel="nofollow">bytes.com/topic/access/in…</a></li><li><a href="http://www.geckoware.com.au/" target="_blank" rel="nofollow">geckoware.com.au</a></li><li><a href="http://www.ok-soft-gmbh.com/jqGrid/sparkline.htm" target="_blank" rel="nofollow">ok-soft-gmbh.com/jqGrid/s…</a></li><li><a href="http://blog.lachmann.org/?p=1383" target="_blank" rel="nofollow">blog.lachmann.org/?p=1383</a></li><li><a href="http://www.juniper.net/us/en/products-services/switching/ex-series/ex2200/" target="_blank" rel="nofollow">juniper.net/us/en/product…</a></li><li><a href="http://www.gns3-labs.com/2008/09/14/gns3-labs-topology-dmvpn-with-vrf-and-eigrp-over-ipsec-tunnels/" target="_blank" rel="nofollow">gns3-labs.com/2008/09/14/…</a></li><li><a href="http://www.ilsistemista.net/index.php/virtualization/1-virtual-machines-performance-comparison.html?start=8" target="_blank" rel="nofollow">ilsistemista.net/index.ph…</a></li></ul></li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="https://x443.wordpress.com/" title="x443" rel="home">
+					x443				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+				<a href="https://wordpress.com/themes/twentyten/" title="Learn more about this theme">The Twenty Ten Theme</a>.				<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<!-- wpcom_wp_footer -->
+<script type="text/javascript" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/x443.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/x443.wordpress.com\/wp-login.php?action=logout&_wpnonce=f43e1462ec","homeURL":"https:\/\/x443.wordpress.com\/","postID":"2636","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/a_002.js"></script>
+
+	<div style="bottom: -231px;" id="bit" class="loggedout-follow-normal">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “x443”</label></h3>
+
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+			
+			<p><input name="email" placeholder="Enter your email address" id="loggedout-follow-field" type="email"></p>
+
+			<input name="action" value="subscribe" type="hidden">
+			<input name="blog_id" value="17657079" type="hidden">
+			<input name="source" value="https://x443.wordpress.com/2012/09/20/synchronous-request-in-nodejs/" type="hidden">
+			<input name="sub-type" value="loggedout-follow" type="hidden">
+
+			<input id="_wpnonce" name="_wpnonce" value="2d82229513" type="hidden"><input name="_wp_http_referer" value="/2012/09/20/synchronous-request-in-nodejs/" type="hidden">
+			<p id="bsub-subscribe-button"><input value="Sign me up" type="submit"></p>
+			</form>
+					<div id="bsub-credit"><a href="https://wordpress.com/?ref=lof">Build a website with WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/x443.wordpress.com\/2012\/09\/20\/synchronous-request-in-nodejs\/":2636};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<iframe src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/master.htm" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var jetpackLikesWidgetQueue = [];
+			var jetpackLikesWidgetBatch = [];
+			var jetpackLikesMasterReady = false;
+
+			function JetpackLikespostMessage( message, target ) {
+				if ( "string" === typeof message ){
+					try{
+						message = JSON.parse( message );
+					}
+					catch(e) {
+						return;
+					}
+				}
+
+				pm( {
+					target: target,
+					type: 'likesMessage',
+					data: message,
+					origin: '*'
+				} );
+			}
+
+			function JetpackLikesBatchHandler() {
+				var requests = [];
+				jQuery( 'div.jetpack-likes-widget-unloaded' ).each( function( i ) {
+					if ( jetpackLikesWidgetBatch.indexOf( this.id ) > -1 )
+						return;
+					jetpackLikesWidgetBatch.push( this.id );
+					var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/;
+					var match = regex.exec( this.id );
+					if ( ! match || match.length != 5 )
+						return;
+
+					var info = {
+						blog_id: match[2],
+						width:   this.width
+					};
+
+					if ( 'post' == match[1] ) {
+						info.post_id = match[3];
+					} else if ( 'comment' == match[1] ) {
+						info.comment_id = match[3];
+					}
+
+					info.obj_id = match[4];
+
+					requests.push( info );
+				});
+
+				if ( requests.length > 0 ) {
+					JetpackLikespostMessage( { event: 'initialBatch', requests: requests }, window.frames['likes-master'] );
+				}
+			}
+
+			function JetpackLikesMessageListener( event ) {
+				if ( "undefined" == typeof event.event )
+					return;
+
+				if ( 'masterReady' == event.event ) {
+					jQuery( document ).ready( function() {
+						jetpackLikesMasterReady = true;
+
+						var stylesData = {
+								event: 'injectStyles'
+						};
+
+						if ( jQuery( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+							JetpackLikespostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+							stylesData.adminBarStyles = {
+								background: jQuery( '#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a' ).css( 'background' ),
+								isRtl: ( 'rtl' == jQuery( '#wpadminbar' ).css( 'direction' ) )
+							};
+						}
+
+						if ( !window.addEventListener )
+							jQuery( '#wp-admin-bar-admin-bar-likes-widget' ).hide();
+
+						stylesData.textStyles = {
+							color: jQuery( '.sd-text-color').css( 'color' ),
+							fontFamily: jQuery( '.sd-text-color' ).css( 'font-family' ),
+							fontSize: jQuery( '.sd-text-color' ).css( 'font-size' ),
+							direction: jQuery( '.sd-text-color' ).css( 'direction' ),
+							fontWeight: jQuery( '.sd-text-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-text-color' ).css( 'font-style' ),
+							textDecoration: jQuery( '.sd-text-color' ).css('text-decoration')
+						};
+
+						stylesData.linkStyles = {
+							color: jQuery( '.sd-link-color' ).css('color'),
+							fontFamily: jQuery( '.sd-link-color' ).css('font-family'),
+							fontSize: jQuery( '.sd-link-color' ).css('font-size'),
+							textDecoration: jQuery( '.sd-link-color' ).css('text-decoration'),
+							fontWeight: jQuery( '.sd-link-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-link-color' ).css( 'font-style' )
+						};
+
+						JetpackLikespostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+						JetpackLikesBatchHandler();
+
+						jQuery( document ).on( 'inview', 'div.jetpack-likes-widget-unloaded', function() {
+							jetpackLikesWidgetQueue.push( this.id );
+						});
+					});
+				}
+
+				if ( 'showLikeWidget' == event.event ) {
+					jQuery( '#' + event.id + ' .post-likes-widget-placeholder'  ).fadeOut( 'fast', function() {
+						jQuery( '#' + event.id + ' .post-likes-widget' ).fadeIn( 'fast', function() {
+							JetpackLikespostMessage( { event: 'likeWidgetDisplayed', blog_id: event.blog_id, post_id: event.post_id, obj_id: event.obj_id }, window.frames['likes-master'] );
+						});
+					});
+				}
+
+				if ( 'clickReblogFlair' == event.event ) {
+					wpcom_reblog.toggle_reblog_box_flair( event.obj_id );
+				}
+
+				if ( 'showOtherGravatars' == event.event ) {
+					var $container = jQuery( '#likes-other-gravatars' );
+					var $list = $container.find( 'ul' );
+
+					$container.hide();
+					$list.html( '' );
+
+					$container.find( '.likes-text span' ).text( event.total );
+
+					jQuery.each( event.likers, function( i, liker ) {
+						$list.append( '<li class="' + liker.css_class + '"><a href="' + liker.profile_URL + '" class="wpl-liker" rel="nofollow" target="_parent"><img src="' + liker.avatar_URL + '" alt="' + liker.name + '" width="30" height="30" style="padding-right: 3px;" /></a></li>');
+					} );
+
+					var offset = jQuery( "[name='" + event.parent + "']" ).offset();
+
+					$container.css( 'left', offset.left + event.position.left - 10 + 'px' );
+					$container.css( 'top', offset.top + event.position.top - 33 + 'px' );
+
+					var rowLength = Math.floor( event.width / 37 );
+					var height = ( Math.ceil( event.likers.length / rowLength ) * 37 ) + 13;
+					if ( height > 204 ) {
+						height = 204;
+					}
+
+					$container.css( 'height', height + 'px' );
+					$container.css( 'width', rowLength * 37 - 7 + 'px' );
+
+					$list.css( 'width', rowLength * 37 + 'px' );
+
+					$container.fadeIn( 'slow' );
+
+					var scrollbarWidth = $list[0].offsetWidth - $list[0].clientWidth;
+					if ( scrollbarWidth > 0 ) {
+						$container.width( $container.width() + scrollbarWidth );
+						$list.width( $list.width() + scrollbarWidth );
+					}
+				}
+			}
+
+			pm.bind( 'likesMessage', function(e) { JetpackLikesMessageListener(e); } );
+
+			jQuery( document ).click( function( e ) {
+				var $container = jQuery( '#likes-other-gravatars' );
+
+				if ( $container.has( e.target ).length === 0 ) {
+					$container.fadeOut( 'slow' );
+				}
+			});
+
+			function JetpackLikesWidgetQueueHandler() {
+				var wrapperID;
+				if ( ! jetpackLikesMasterReady ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				if ( jetpackLikesWidgetQueue.length > 0 ) {
+					// We may have a widget that needs creating now
+					var found = false;
+					while( jetpackLikesWidgetQueue.length > 0 ) {
+						// Grab the first member of the queue that isn't already loading.
+						wrapperID = jetpackLikesWidgetQueue.splice( 0, 1 )[0];
+						if ( jQuery( '#' + wrapperID ).hasClass( 'jetpack-likes-widget-unloaded' ) ) {
+							found = true;
+							break;
+						}
+					}
+					if ( ! found ) {
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				} else if ( jQuery( 'div.jetpack-likes-widget-unloaded' ).length > 0 ) {
+					// Grab any unloaded widgets for a batch request
+					JetpackLikesBatchHandler();
+
+					// Get the next unloaded widget
+					wrapperID = jQuery( 'div.jetpack-likes-widget-unloaded' ).first()[0].id;
+					if ( ! wrapperID ) {
+						// Everything is currently loaded
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				}
+
+				if ( 'undefined' === typeof wrapperID ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				var $wrapper = jQuery( '#' + wrapperID );
+				$wrapper.find( 'iframe' ).remove();
+
+				if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='22px' width='68px' frameBorder='0' scrolling='no' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				} else {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='55px' width='100%' frameBorder='0' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				}
+
+				$wrapper.removeClass( 'jetpack-likes-widget-unloaded' ).addClass( 'jetpack-likes-widget-loading' );
+
+				$wrapper.find( 'iframe' ).load( function( e ) {
+					var $iframe = jQuery( e.target );
+					$wrapper.removeClass( 'jetpack-likes-widget-loading' ).addClass( 'jetpack-likes-widget-loaded' );
+
+					JetpackLikespostMessage( { event: 'loadLikeWidget', name: $iframe.attr( 'name' ), width: $iframe.width() }, window.frames[ 'likes-master' ] );
+
+					if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+						$wrapper.find( 'iframe' ).Jetpack( 'resizeable' );
+					}
+				});
+				setTimeout( JetpackLikesWidgetQueueHandler, 250 );
+			}
+			JetpackLikesWidgetQueueHandler();
+		//]]>
+		</script>
+<script type="text/javascript" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var JetpackEmojiSettings = {"base_url":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/emoji\/twemoji\/"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/a_003.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><script src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/w.js" type="text/javascript" async="" defer="defer"></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'17657079','blog_tz':'1','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'17657079','v':'wpcom','tz':'1','user_id':'0','post':'2636','subd':'x443'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1wamRFTUJvcCVmdVtvcCUrditEcC45XS5pNzBoZDMmbVIscitTaTFCLmc0UkpFZFZUN05JcS9bS1diRTVfT29KdlJZS0QxSmxaflpWfltjc1daMWIyayxvaytjJUsudnFyWDA4RlpSSmYuWFd+LTA3LjJ8QzMwPVpRPzBSNWM/Q3FWflhZcUUmc1ByLXRmaS18TExhVDBydEpudXRyaG11REJlTmVBRnhKQy5VUT1YWEpmfmNjOHBjfEl0VzlwVGJWPS1rOEJuMGcvcEJILU0sSUxJK0tdS3pscy8wZisxWGUrdnpELzc4LFh4U000XWZMMltxTnBPQklkTnxsTkhEWllHbTVJQX5SNWMzcy45VjB3fjRxdV8wdjZqTGd+bk0mb0VURnBnSDB5ejNYd1ZHckxd'}]);
+_stq.push([ 'clickTrackerInit', '17657079', '2636' ]);
+	</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<img id="wpstats" src="Synchronous%20request%20in%20nodejs%20%7C%20x443_files/g.gif"></body></html>

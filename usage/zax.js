@@ -21,7 +21,7 @@ function completeReq(strRes) {
   var returned = S(strRes.toString().trim()).left(strLen).toString().trim();
   return returned;
 }
-/*
+
 var result = zax.query('REQUEST "https://raw.githubusercontent.com/json-ld/json-ld.org/master/test-suite/tests/toRdf-manifest.jsonld"');
 //var result = zax.query('REQUEST "http://www.w3.org/Consortium/Offices/Presentations/RDFTutorial/rdfs/Countries.owl"');
 //console.log('Query result: \n' + result + '\n');
@@ -36,15 +36,8 @@ var asu = S(result.toString().trim()).left(strLen).toString().trim();
 console.log(asu);
 console.log(isJson(asu))
 var obj = JSON.parse(asu);
-console.log(obj.name)
-*/
-
-var result = zax.query('REQUEST "http://www.w3.org/Consortium/Offices/Presentations/RDFTutorial/rdfs/Countries.owl"');
-/*
-var strLen1 = S(result1.toString().trim()).length - 1;
-console.log(strLen1);
-var asu1 = S(result1.toString().trim()).left(strLen1).toString().trim();
-console.log(asu1);
-*/
-var countries = completeReq(result);
-console.log(countries);
+console.log(obj["@context"]);
+console.log(obj["@id"]);
+console.log(obj["@type"]);
+console.log(obj.name);
+console.log(obj.description);
