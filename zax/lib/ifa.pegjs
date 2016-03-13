@@ -7,6 +7,13 @@
       assertivePropositional: propositional
     }
   }
+  function inform(url, propositional) {
+    return {
+      force: 'inform',
+      theUrl: url,
+      informativePropositional: propositional
+    }
+  }
 
 }
 start
@@ -26,14 +33,13 @@ assertivePropositional
     {
       return assert(url, propositional);
     }
-
 informative
   = informativeForce _ informativePropositional
 informativeForce
   = 'INFORM' / 'inform'
 informativePropositional
   = url:string _ propositional:string
-    { inform(url, propositional) }
+    { return inform(url, propositional) }
 
 directives
   = 'REQUEST' _ url:string { return getRequest(url)  } //return getRequest(url) }

@@ -5,16 +5,25 @@ var assert = require('assert'),
 
 var zax = new Zax();
 
-// I need to deal with these arrays later,  without array:
-// [ [ [ 'ASSERT', [Object], [Object] ], [] ] ]
-var assertResult = zax.query('ASSERT "http://bpdp.xyz/commitment" "test1"')[0][0][2];
+var assertResult = zax.query('ASSERT "http://bpdp.xyz/commitment" "test assert"');
+var informResult = zax.query('INFORM "http://bpdp.xyz/commitment" "test inform"');
 
-describe('Assert', function() {
-  describe('assert url propositional', function () {
-    it('should return parsed assert statement', function () {
+describe('ASSERT', function() {
+  describe('assert url propositionalContents', function () {
+    it('should return parsed ASSERT statement', function () {
       assert.equal('assert', assertResult.force);
       assert.equal('http://bpdp.xyz/commitment', assertResult.theUrl);
-      assert.equal('test1', assertResult.assertivePropositional);
+      assert.equal('test assert', assertResult.assertivePropositional);
+    });
+  });
+});
+
+describe('INFORM', function() {
+  describe('inform url propositionalContents', function () {
+    it('should return parsed INFORM statement', function () {
+      assert.equal('inform', informResult.force);
+      assert.equal('http://bpdp.xyz/commitment', informResult.theUrl);
+      assert.equal('test inform', informResult.informativePropositional);
     });
   });
 });
