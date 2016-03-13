@@ -1,14 +1,11 @@
 {
 
-  var request = require('sync-request'),
-      S = require('string');
-
-  function getRequest(url) {
-    
-    var res = request('GET', url);
-    var obj = S(res.getBody().toString().trim());
-    return obj;
-
+  function assert(url, propositional) {
+    return {
+      force: 'assert',
+      theUrl: url,
+      assertivePropositional: propositional
+    }
   }
 
 }
@@ -21,10 +18,21 @@ force
 representatives
   = assertive / informative
 assertive
-  = 'ASSERT' _ url:string _ propositional:string
-    { assert(url, propositional) }
+  = assertiveForce _ assertivePropositional
+assertiveForce
+  = 'ASSERT' / 'assert'
+assertivePropositional
+  = url:string _ propositional:string
+    {
+      return assert(url, propositional);
+    }
+
 informative
-  = 'INFORM' _ url:string _ propositional:string
+  = informativeForce _ informativePropositional
+informativeForce
+  = 'INFORM' / 'inform'
+informativePropositional
+  = url:string _ propositional:string
     { inform(url, propositional) }
 
 directives
