@@ -9,6 +9,7 @@ function Zax() {
 
 Zax.prototype.query = function (statement) {
   var parser = PEG.buildParser(this.grammar);
+  // TODO:
   // I need to deal with these arrays later,  without array:
   // [ [ [ 'ASSERT', [Object], [Object] ], [] ] ]
   return parser.parse(statement.trim())[0][0][2];
