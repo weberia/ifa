@@ -5,10 +5,10 @@
   "main": "zax.js",
   "bin": "bin/zax",
   "dependencies": {
+    "async": "^2.0.0-rc.2",
     "pegjs": "^0.9.0",
-    "request": "^2.67.0",
-    "string": "^3.3.1",
     "request": "^2.69.0",
+    "string": "^3.3.1",
     "zax": "file:../zax/"
   },
   "scripts": {
