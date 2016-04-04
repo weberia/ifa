@@ -5,10 +5,11 @@
   "main": "zax.js",
   "bin": "bin/zax",
   "dependencies": {
-    "commander": "^2.9.0",
     "pegjs": "^0.9.0",
     "request": "^2.67.0",
-    "string": "^3.3.1"
+    "string": "^3.3.1",
+    "request": "^2.69.0",
+    "zax": "file:../zax/"
   },
   "scripts": {
     "test": "mocha spec"
